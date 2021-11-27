@@ -1,0 +1,18 @@
+#Wordpress Uploads folder .htaccess
+
+# Only the following file extensions are allowed
+Order Allow,Deny
+Deny from all
+<FilesMatch "\.([Jj][Pp][Ee]?[Gg]?|[Pp][Nn][Gg]|[Gg][Ii][Ff]|[Gg][Zz]|[Pp][Dd][Ff])$">
+Allow from all
+</FilesMatch>
+ 
+# Block double extensions from being uploaded or accessed, including htshells
+<FilesMatch ".*\.([^.]+)\.([^.]+)$">
+Order Deny,Allow
+Deny from all
+</FilesMatch>
+
+# Disable script execution
+AddHandler cgi-script .php .php2 .php3 .php4 .php5 .php6 .php7 .php8 .pl .py .js .jsp .asp .htm .html .shtml .sh .cgi
+Options -ExecCGI -Indexes
