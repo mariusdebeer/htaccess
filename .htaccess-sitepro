@@ -1,0 +1,17 @@
+# Secure php.ini and .htaccess
+RewriteRule ^(php\.ini|\.htaccess) - [NC,F]
+
+
+RewriteCond %{REQUEST_FILENAME} !-f [OR]
+RewriteCond %{REQUEST_URI} ^\/(js\/main\.js|css\/(\d+|common|site)\.css)$
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ sitepro/$1 [L,QSA]
+# Break any site from loading except if in Sitepro folder
+DirectoryIndex index.php
+RewriteEngine On
+
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteRule ^ index.php [L]
+
+RewriteRule !^(sitepro/|index\.php) [NC,F]
