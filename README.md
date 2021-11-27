@@ -1,6 +1,6 @@
 # .htaccess
 # Location : /public_html/ or wherever your Wordpress root is.
-This is meant to go into the root of your Wordpress website.  The idea is to block as much as possible in terms of bat bots, certain exploits and other things.
+This is meant to go into the root of your Wordpress website.  The idea is to block as much as possible in terms of bad bots, certain exploits and other things.
 The code should be self-explanitory.
 
 # .htaccess-WP-Uploads
