@@ -1,11 +1,21 @@
+# Stop ModPagespeed
+ModPagespeed off
 # Secure php.ini and .htaccess
 RewriteRule ^(php\.ini|\.htaccess) - [NC,F]
-
+# Ignore the following directories to ensure sliders work
+RewriteCond %{REQUEST_URI} "/data1/" [OR]
+RewriteCond %{REQUEST_URI} "/data1/images" [OR]
+RewriteCond %{REQUEST_URI} "/data1/tooltips" [OR]
+RewriteCond %{REQUEST_URI} "/engine1/" 
+RewriteRule (.*) $1 [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f [OR]
 RewriteCond %{REQUEST_URI} ^\/(js\/main\.js|css\/(\d+|common|site)\.css)$
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ sitepro/$1 [L,QSA]
+#RewriteRule ^(.*)$ engine1/$1 [L,QSA]
+#RewriteRule ^(.*)$ data1/$1 [L,QSA]
+
 # Break any site from loading except if in Sitepro folder
 DirectoryIndex index.php
 RewriteEngine On
