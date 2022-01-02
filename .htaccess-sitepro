@@ -1,5 +1,6 @@
-# Stop ModPagespeed
-ModPagespeed off
+RewriteEngine On
+RewriteCond %{SERVER_PORT} 80
+RewriteRule ^(.*)$ https://www.*.com/$1 [R,L]
 # Secure php.ini and .htaccess
 RewriteRule ^(php\.ini|\.htaccess) - [NC,F]
 # Ignore the following directories to ensure sliders work
