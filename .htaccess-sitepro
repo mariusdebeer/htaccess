@@ -1,5 +1,5 @@
 # Secure php.ini and .htaccess
-RewriteRule ^(php\.ini|\.htaccess) - [NC,F]
+# RewriteRule ^(php\.ini|\.htaccess) - [NC,F]
 # Ignore the following directories to ensure sliders work
 RewriteCond %{REQUEST_URI} "/data1/" [OR]
 RewriteCond %{REQUEST_URI} "/data1/images" [OR]
