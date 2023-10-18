@@ -1,25 +1,40 @@
-# Secure php.ini and .htaccess
-# RewriteRule ^(php\.ini|\.htaccess) - [NC,F]
-# Ignore the following directories to ensure sliders work
-RewriteCond %{REQUEST_URI} "/data1/" [OR]
-RewriteCond %{REQUEST_URI} "/data1/images" [OR]
-RewriteCond %{REQUEST_URI} "/data1/tooltips" [OR]
-RewriteCond %{REQUEST_URI} "/engine1/" 
-RewriteRule (.*) $1 [L]
+<IfModule pagespeed_module>
+	ModPagespeed off
+</IfModule>
 
+<IfModule mod_expires.c>
+	ExpiresActive On
+	ExpiresDefault A0
+	ExpiresByType image/gif A691200
+	ExpiresByType image/png A691200
+	ExpiresByType image/jpeg A691200
+	ExpiresByType text/css A691200
+	ExpiresByType text/javascript A691200
+	ExpiresByType application/javascript A691200
+</IfModule>
+
+ErrorDocument 401 "Unauthorized"
+ErrorDocument 403 "Forbidden"
+<IfModule mod_negotiation.c>
+	#Options -MultiViews
+</IfModule>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^\.well-known/.+ - [L]
+RewriteCond %{HTTP_HOST} !^www\.
+RewriteRule ^(.*)$ https://www.%{HTTP_HOST}/$1 [R=301,L]
+
+#### PERSISTENT CONTENT ####
+
+
+
+#### PERSISTENT CONTENT END ####
+
+DirectoryIndex index.php index.cgi index.html
 RewriteCond %{REQUEST_FILENAME} !-f [OR]
-RewriteCond %{REQUEST_URI} ^\/(js\/main\.js|css\/(\d+|common|site)\.css)$
+RewriteCond %{REQUEST_URI} ^\/(js\/(main\.js|boostrap\.min\.js)|css\/(\d+\.css|common\.css|site\.css|bootstrap\.min\.css))$
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ sitepro/$1 [L,QSA]
-#RewriteRule ^(.*)$ engine1/$1 [L,QSA]
-#RewriteRule ^(.*)$ data1/$1 [L,QSA]
 
-# Break any site from loading except if in Sitepro folder
-DirectoryIndex index.php
-RewriteEngine On
 
-RewriteCond %{SCRIPT_FILENAME} !-d
-RewriteCond %{SCRIPT_FILENAME} !-f
-RewriteRule ^ index.php [L]
-
-RewriteRule !^(sitepro/|index\.php) [NC,F]
+#### PERSISTENT CONTENT ####
